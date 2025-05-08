@@ -51,7 +51,9 @@ func (h *MovieHandler) GetMovies(c *gin.Context) {
 
 func (h *MovieHandler) processRSSFeed() ([]models.Movie, error) {
 
-	content, err := ioutil.ReadFile("/home/Área de trabalho/Vimos/teste.rss")
+	// Adicionar o path em questão no .env, apontando para o arquivo .rss gerado pelo próprio LEtterboxd
+	rssPath := os.Getenv("RSS_FILE_PATH")
+	content, err := ioutil.ReadFile(rssPath)
 	if err != nil {
 		h.Logger.Printf("Erro ao ler o arquivo RSS: %v", err)
 		return nil, err
